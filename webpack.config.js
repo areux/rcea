@@ -15,8 +15,8 @@ module.exports = (env, argv) => {
         // entry: './src/playground/hoc.js',
         entry: './src/app.js',
         output: {
-            path: path.join(__dirname, 'public'),
-            filename: 'bundle.js',
+            path: path.join(__dirname, 'public', 'dist'),
+            filename: 'bundle.js'
         },
         mode: 'development',
         module: {
@@ -30,18 +30,18 @@ module.exports = (env, argv) => {
                     loader: MiniCssExtractPlugin.loader,
                     options: {}
                 },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
+                {
+                    loader: 'css-loader',
+                    options: {
+                        sourceMap: true
                     }
+                },
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true
+                    }
+                }
                 ]
             }
             ]
@@ -52,6 +52,7 @@ module.exports = (env, argv) => {
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
             contentBase: path.join(__dirname, 'public'),
+            publicPath: '/dist/',
             historyApiFallback: true,
         },
     }

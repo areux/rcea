@@ -47,3 +47,29 @@ export const setTextFilter = (text = '') => ({
     type: 'SET_TEXT_FILTER',
     text
 });
+
+// SET_EXPENSES
+export const setExpenses = (expenses) => ({
+    type: 'SET_EXPENSES',
+    expenses
+});
+
+// 1. fetch all expense data once
+// 2. parse that data into an array
+// 3. dispatch SET_EXPENSES
+export const startSetExpenses = () => {
+    return (dispatch) => {
+        return database.ref('expenses').once('value').then((snapshot) => {
+            const r = [];
+            snapshot.forEach((child) => {
+                const id = child.key;
+                const val = child.val();
+                r.push({
+                    id,
+                    ...val
+                });
+            });
+            dispatch(setExpenses(r));
+        });
+    };
+};

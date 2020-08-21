@@ -2,22 +2,22 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { EditExpensePage } from '../../components/EditExpensePage';
 import expenses from '../fixtures/expenses';
-// import { removeExpense, editExpense } from '../../actions/expenses';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import database from '../../firebase/firebase';
+// import { startRemoveExpense } from '../../actions/expenses';
 
-// refactor edit expense page to be a class based component
-// setup mapdispatchtoprops editexpense and removeexpense
-
-let editExpense, history, removeExpense, wrapper, expense;
+let editExpense, history, startRemoveExpense, wrapper, expense;
 beforeEach(() => {
     editExpense = jest.fn();
     history = { push: jest.fn() };
-    removeExpense = jest.fn();
+    startRemoveExpense = jest.fn();
     expense = { id: expenses[1].id };
     wrapper = shallow(<EditExpensePage 
         expense={expense}
         editExpense={editExpense}
         history={history}
-        removeExpense={removeExpense}
+        startRemoveExpense={startRemoveExpense}
     />);
 });
 
@@ -29,7 +29,7 @@ test('should render EditExpensePage', () => {
         expense={expenses[1]}
         editExpense={editExpense}
         history={history}
-        removeExpense={removeExpense}
+        startRemoveExpense={startRemoveExpense}
     />);
     expect(wrapper).toMatchSnapshot();
 });
@@ -44,8 +44,8 @@ test('should handle editExpense', () => {
 
 // should handle removeExpense
 // spies
-test('should handle removeExpense', () => {
+test('should handle startRemoveExpense', () => {
     wrapper.find('button').simulate('click', undefined);
-    expect(removeExpense).toHaveBeenLastCalledWith(expense);
+    expect(startRemoveExpense).toHaveBeenLastCalledWith(expense);
     expect(history.push).toHaveBeenLastCalledWith('/');
 });

@@ -48,6 +48,21 @@ export const editExpense = (id, updates) => ({
     updates
 });
 
+// create startEditExpense
+// test 'should edit expenses from firebase'
+// use startEditExpense in EditExpensePage instead of editExpense
+// adjust EditExpensePage
+export const startEditExpense = (id, updates) => {
+    return (dispatch) => {
+        const update = database.ref(`expenses/${id}`).update({
+            ...updates
+        }).then((snapshot) => {
+            dispatch(editExpense(id, updates));
+        });
+        return update;
+    };
+};
+
 export const setTextFilter = (text = '') => ({
     type: 'SET_TEXT_FILTER',
     text

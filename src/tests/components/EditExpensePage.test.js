@@ -7,15 +7,15 @@ import thunk from 'redux-thunk';
 import database from '../../firebase/firebase';
 // import { startRemoveExpense } from '../../actions/expenses';
 
-let editExpense, history, startRemoveExpense, wrapper, expense;
+let startEditExpense, history, startRemoveExpense, wrapper, expense;
 beforeEach(() => {
-    editExpense = jest.fn();
+    startEditExpense = jest.fn();
     history = { push: jest.fn() };
     startRemoveExpense = jest.fn();
     expense = { id: expenses[1].id };
     wrapper = shallow(<EditExpensePage 
         expense={expense}
-        editExpense={editExpense}
+        startEditExpense={startEditExpense}
         history={history}
         startRemoveExpense={startRemoveExpense}
     />);
@@ -27,7 +27,7 @@ test('should render EditExpensePage', () => {
     // 
     wrapper = shallow(<EditExpensePage 
         expense={expenses[1]}
-        editExpense={editExpense}
+        startEditExpense={startEditExpense}
         history={history}
         startRemoveExpense={startRemoveExpense}
     />);
@@ -36,9 +36,9 @@ test('should render EditExpensePage', () => {
 
 // should handle editExpense
 // spies
-test('should handle editExpense', () => {
+test('should handle startEditExpense', () => {
     wrapper.find('ExpenseForm').prop('onSubmit')(expenses[1]);
-    expect(editExpense).toHaveBeenLastCalledWith(expense.id, expenses[1]);
+    expect(startEditExpense).toHaveBeenLastCalledWith(expense.id, expenses[1]);
     expect(history.push).toHaveBeenLastCalledWith('/');
 });
 

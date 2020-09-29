@@ -8,7 +8,7 @@ import EditExpensePage from '../components/EditExpensePage';
 import HelpPage from '../components/HelpPage';
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage';
-import Header from '../components/Header';
+import PrivateRoute from './PrivateRoute';
 
 console.log('Loading AppRouter...');
 export const history = createBrowserHistory();
@@ -17,12 +17,11 @@ const AppRouter = () => {
     return (
         <Router history={history}>
                 <div>
-                    <Header />
                     <Switch>
                         <Route exact path="/" component={LoginPage} />
-                        <Route path="/dashboard" component={ExpenseDashboardPage} />
-                        <Route path="/create" component={AddExpensePage} />
-                        <Route path="/edit/:id" component={EditExpensePage} />
+                        <PrivateRoute path="/dashboard" component={ExpenseDashboardPage} />
+                        <PrivateRoute path="/create" component={AddExpensePage} />
+                        <PrivateRoute path="/edit/:id" component={EditExpensePage} />
                         <Route path="/help" component={HelpPage} />
                         <Route component={NotFoundPage} />
                     </Switch>

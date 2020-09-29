@@ -10,6 +10,6 @@ test('should set uid for login', () => {
 });
 
 test('should clear uid for logout', () => {
-    const state = authReducer(undefined, { type: 'LOGOUT' });
+    const state = authReducer({ uid: 'anything' }, { type: 'LOGOUT' });
     expect(state).toEqual({})
 });

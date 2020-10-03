@@ -8,16 +8,16 @@ export const PrivateRoute = ({
     component: Component,
     ...rest
 }) => (
-        <div>
-            <Header />
-            <Route {...rest} component={(props) => (
-                isAuthenticated ? (
+        <Route {...rest} component={(props) => (
+            isAuthenticated ? (
+                <div>
+                    <Header />
                     <Component {...props} />
-                ) : (
-                        <Redirect to='/' />
-                    )
-            )} />
-        </div>
+                </div>
+            ) : (
+                    <Redirect to='/' />
+                )
+        )} />
     );
 
 const mapStateToProps = (state) => ({

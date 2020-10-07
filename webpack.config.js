@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
         // entry: './src/playground/redux-101.js',
         // entry: './src/playground/redux-expensify.js',
         // entry: './src/playground/hoc.js',
-        entry: './src/app.js',
+        entry: ['babel-polyfill', './src/app.js'],
         output: {
             path: path.join(__dirname, 'public', 'dist'),
             filename: 'bundle.js'
